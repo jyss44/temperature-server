@@ -15,4 +15,13 @@ services:
     privileged: true
     command: -port ${MONITOR_PORT} -dburl http://temp-database:${DATABASE_PORT}
     ports:
-      - 6969:6969
+      - ${MONITOR_PORT}:6969
+
+  graph:
+    image: ghcr.io/jyss44/temperature-graph-py
+    depends_on:
+      - temp-database
+      - temp-monitor
+    command: -p ${GRAPH_PORT} -db http://temp-database:${DATABASE_PORT} -t http://temp-monitor:${MONITOR_PORT}
+    ports:
+      - ${GRAPH_PORT}:8888
