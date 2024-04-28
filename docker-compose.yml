@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   temp-database:
-    image: ghcr.io/jyss44/temperature-monitor:latest
+    image: ghcr.io/jyss44/temperature-database:latest
     volumes:
       - ${PWD}/database:/app/database
     command: -port ${DATABASE_PORT} -dbpath database/${DB_FILE}
